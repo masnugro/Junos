@@ -1,6 +1,7 @@
 ## Topology
 
-<img width="856" alt="image" src="https://github.com/masnugro/Junos/assets/78342991/043a38c6-7882-4cec-8329-123dc2e85f7a">
+<img width="1198" alt="Screenshot 2024-05-28 at 8 09 31 PM" src="https://github.com/masnugro/Junos/assets/78342991/e18338ca-cad5-4b0a-914c-c4771eaaa43c">
+
 
 
 
