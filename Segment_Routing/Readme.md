@@ -1,6 +1,12 @@
 # What is this? 
 This is to test L3VPN via OSPF SR-MPLS functionality in Juniper routers powered by Junos
 
+#Topology
+The lab topology as below:
+
+<img width="1103" alt="Screenshot 2024-05-27 at 4 06 04 PM" src="https://github.com/masnugro/Junos/assets/78342991/1abe42a4-6436-4447-a218-017e2eea934c">
+
+
 CE1
 ```
 set interfaces ge-0/0/0 unit 0 family inet address 192.168.10.5/24
