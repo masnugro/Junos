@@ -1,5 +1,5 @@
 # What is this? 
-This is to test L3VPN via OSPF SR-MPLS functionality in Juniper routers powered by Junos
+This is to test eBGP-LU L3VPN via OSPF SR-MPLS functionality in Juniper routers powered by Junos
 
 # Topology
 The lab topology as below:
