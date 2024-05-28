@@ -12,4 +12,7 @@ and the detail interface:
 
 
 ## PS
-Do not forget to ensure you are already enable the enhanced-ip configuration in your Juniper router: set chassis network-services enhanced-ip
+Do not forget to ensure you are already enable the enhanced-ip configuration in your Juniper router 
+```
+set chassis network-services enhanced-ip
+```
