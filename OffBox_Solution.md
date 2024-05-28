@@ -1,6 +1,6 @@
 Untrusted Network
 
---------------------------
+```
 set interfaces ge-0/0/0 unit 0 family inet address 10.10.10.1/30
 set interfaces ge-0/0/1 unit 0 family inet address 11.11.11.1/30
 set interfaces ge-0/0/2 unit 0 family inet address 12.12.12.1/30
@@ -29,11 +29,11 @@ set protocols bgp group vsrx3-untrust peer-as 500
 set protocols bgp group vsrx3-untrust local-as 2000
 set protocols bgp group vsrx3-untrust multipath
 set protocols bgp group vsrx3-untrust neighbor 12.12.12.2 export default-export
-------------------------------------
+```
 
 Trusted Network
 
-------------------------------------
+```
 
 set interfaces ge-0/0/0 unit 0 family inet address 13.13.13.1/30
 set interfaces ge-0/0/1 unit 0 family inet address 14.14.14.1/30
@@ -84,11 +84,11 @@ set protocols bgp group vsrx3-trust peer-as 500
 set protocols bgp group vsrx3-trust local-as 1000
 set protocols bgp group vsrx3-trust multipath
 set protocols bgp group vsrx3-trust neighbor 15.15.15.2 export client-export
-----------------------------------
+```
 
 vSRX-1
 
------------------------------------
+```
 
 set security nat source pool vsrx1-pool address 30.0.0.0/30
 set security nat source pool vsrx1-pool port range 2048
@@ -146,11 +146,11 @@ set protocols bgp group MX-INET local-as 500
 set protocols bgp group MX-INET neighbor 10.10.10.1 peer-as 2000
 set routing-options autonomous-system 500
 set routing-options static route 30.0.0.0/30 discard
-----------------------------------------
+```
 
 vSRX-2
 
-----------------------------------------
+```
 set security nat source pool vsrx2-pool address 40.0.0.0/30
 set security nat source pool vsrx2-pool port range 3000
 set security nat source pool vsrx2-pool port range to 3999
@@ -203,11 +203,11 @@ set protocols bgp group MX-INET local-as 500
 set protocols bgp group MX-INET neighbor 11.11.11.1 peer-as 2000
 set routing-options autonomous-system 500
 set routing-options static route 40.0.0.0/30 discard
----------------------------------------------
+```
 
 vSRX-3
 
----------------------------------------------
+```
 set security nat source pool vsrx3-pool address 50.0.0.0/30
 set security nat source pool vsrx3-pool port range 4000
 set security nat source pool vsrx3-pool port range to 4999
@@ -261,7 +261,7 @@ set protocols bgp group MX-INET local-as 500
 set protocols bgp group MX-INET neighbor 12.12.12.1 peer-as 2000
 set routing-options autonomous-system 500
 set routing-options static route 50.0.0.0/30 discard
--------------------------------------------------
+```
 
 
 
