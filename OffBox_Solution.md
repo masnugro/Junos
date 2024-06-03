@@ -116,10 +116,6 @@ set security policies from-zone trust to-zone untrust policy default-permit matc
 set security policies from-zone trust to-zone untrust policy default-permit match destination-address any
 set security policies from-zone trust to-zone untrust policy default-permit match application any
 set security policies from-zone trust to-zone untrust policy default-permit then permit
-set security policies from-zone trust to-zone untrust policy NAPT44-policy match source-address NAPT-source
-set security policies from-zone trust to-zone untrust policy NAPT44-policy match destination-address any
-set security policies from-zone trust to-zone untrust policy NAPT44-policy match application any
-set security policies from-zone trust to-zone untrust policy NAPT44-policy then permit
 set security zones security-zone trust host-inbound-traffic system-services all
 set security zones security-zone trust host-inbound-traffic protocols all
 set security zones security-zone trust interfaces ge-0/0/1.0
