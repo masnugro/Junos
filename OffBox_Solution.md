@@ -17,11 +17,15 @@ set interfaces ge-0/0/3 unit 0 family inet address 85.0.0.2/30
 set interfaces fxp0 unit 0 family inet address 100.123.1.0/16
 set interfaces lo0 unit 20 family inet address 85.0.0.10/32
 set policy-options policy-statement default-export term 1 from protocol static
-set policy-options policy-statement default-export term 1 from route-filter 0.0.0.0/0 exact
+set policy-options policy-statement default-export term 1 from route-filter 80.0.0.10/24 exact
 set policy-options policy-statement default-export term 1 then accept
+set policy-options policy-statement default-export term 2 from protocol direct
+set policy-options policy-statement default-export term 2 from route-filter 85.0.0.10/32 exact
+set policy-options policy-statement default-export term 2 then accept
 set routing-options autonomous-system 2000
-set routing-options static route 0.0.0.0/0 next-hop 85.0.0.1
+set routing-options static route 0.0.0.0/0 next-hop 100.123.0.1
 set routing-options static route 11.0.0.0/28 next-hop 70.1.1.2
+set routing-options static route 80.0.0.0/24 next-hop 85.0.0.1
 set protocols router-advertisement interface fxp0.0 managed-configuration
 set protocols bgp group vsrx1-untrust type external
 set protocols bgp group vsrx1-untrust peer-as 500
@@ -38,6 +42,10 @@ set protocols bgp group vsrx3-untrust peer-as 500
 set protocols bgp group vsrx3-untrust local-as 2000
 set protocols bgp group vsrx3-untrust multipath
 set protocols bgp group vsrx3-untrust neighbor 12.12.12.2 export default-export
+set protocols bgp group test type external
+set protocols bgp group test peer-as 2500
+set protocols bgp group test local-as 2000
+set protocols bgp group test neighbor 85.0.0.1
 ```
 
 Trusted Network
@@ -47,7 +55,7 @@ Trusted Network
 set interfaces ge-0/0/0 unit 0 family inet address 13.13.13.1/30
 set interfaces ge-0/0/1 unit 0 family inet address 14.14.14.1/30
 set interfaces ge-0/0/2 unit 0 family inet address 15.15.15.1/30
-set interfaces ge-0/0/3 unit 0 family inet address 70.1.1.1/30
+set interfaces ge-0/0/3 unit 0 family inet address 86.0.0.2/30
 set interfaces fxp0 unit 0 family inet address 100.123.1.1/16
 set interfaces lo0 unit 10 family inet address 12.0.0.1/32
 set interfaces lo0 unit 10 family inet address 12.0.0.2/32
@@ -63,15 +71,18 @@ set policy-options policy-statement default-export term 1 from route-filter 0.0.
 set policy-options policy-statement default-export term 1 then accept
 set policy-options policy-statement pfe-hash from route-filter 100.0.0.1/32 exact
 set policy-options policy-statement pfe-hash from route-filter 0.0.0.0/0 exact
+set policy-options policy-statement pfe-hash from route-filter 0.0.0.0/0 orlonger
 set policy-options policy-statement pfe-hash then load-balance consistent-hash
 set policy-options policy-statement pfe-hash then accept
 set policy-options policy-statement pfe-lb-hash term 1 from route-filter 100.0.0.1/32 exact
 set policy-options policy-statement pfe-lb-hash term 1 from route-filter 0.0.0.0/0 exact
+set policy-options policy-statement pfe-lb-hash term 1 from route-filter 0.0.0.0/0 orlonger
 set policy-options policy-statement pfe-lb-hash term 1 then load-balance source-ip-only
 set policy-options policy-statement pfe-lb-hash term 1 then accept
 set policy-options policy-statement pfe-lb-hash term 2 then load-balance per-packet
 set policy-options policy-statement pfe-lb-hash term 2 then accept
 set routing-options autonomous-system 1000
+set routing-options static route 0.0.0.0/0 next-hop 100.123.0.1
 set routing-options static route 11.0.0.0/28 next-hop 70.1.1.2
 set routing-options forwarding-table export pfe-lb-hash
 set protocols router-advertisement interface fxp0.0 managed-configuration
@@ -93,6 +104,10 @@ set protocols bgp group vsrx3-trust peer-as 500
 set protocols bgp group vsrx3-trust local-as 1000
 set protocols bgp group vsrx3-trust multipath
 set protocols bgp group vsrx3-trust neighbor 15.15.15.2 export client-export
+set protocols bgp group tester type external
+set protocols bgp group tester peer-as 1500
+set protocols bgp group tester local-as 1000
+set protocols bgp group tester neighbor 86.0.0.1
 ```
 
 vSRX-1
@@ -116,19 +131,24 @@ set security policies from-zone trust to-zone untrust policy default-permit matc
 set security policies from-zone trust to-zone untrust policy default-permit match destination-address any
 set security policies from-zone trust to-zone untrust policy default-permit match application any
 set security policies from-zone trust to-zone untrust policy default-permit then permit
+set security zones security-zone trust tcp-rst
 set security zones security-zone trust host-inbound-traffic system-services all
 set security zones security-zone trust host-inbound-traffic protocols all
 set security zones security-zone trust interfaces ge-0/0/1.0
 set security zones security-zone trust interfaces lo0.0
+set security zones security-zone untrust screen untrust-screen
 set security zones security-zone untrust host-inbound-traffic system-services all
 set security zones security-zone untrust host-inbound-traffic protocols all
 set security zones security-zone untrust interfaces ge-0/0/0.0
 set interfaces ge-0/0/0 unit 0 family inet address 10.10.10.2/30
 set interfaces ge-0/0/1 unit 0 family inet address 13.13.13.2/30
-set interfaces fxp0 unit 0 family inet dhcp
+set interfaces fxp0 unit 0 family inet address 100.123.12.0/16
 set interfaces lo0 unit 0 family inet address 100.0.0.1/32
 set policy-options policy-statement trust-policy term 1 from protocol bgp
 set policy-options policy-statement trust-policy term 1 from route-filter 0.0.0.0/0 exact
+set policy-options policy-statement trust-policy term 1 from route-filter 80.0.0.0/24 exact
+set policy-options policy-statement trust-policy term 1 from route-filter 85.0.0.10/32 exact
+set policy-options policy-statement trust-policy term 1 from route-filter 0.0.0.0/0 orlonger
 set policy-options policy-statement trust-policy term 1 then next-hop self
 set policy-options policy-statement trust-policy term 1 then accept
 set policy-options policy-statement trust-policy term 2 from protocol direct
@@ -150,6 +170,7 @@ set protocols bgp group MX-INET export untrust-policy
 set protocols bgp group MX-INET local-as 500
 set protocols bgp group MX-INET neighbor 10.10.10.1 peer-as 2000
 set routing-options autonomous-system 500
+set routing-options static route 0.0.0.0/0 next-hop 100.123.0.1
 set routing-options static route 30.0.0.0/30 discard
 ```
 
@@ -173,19 +194,24 @@ set security policies from-zone trust to-zone untrust policy default-permit matc
 set security policies from-zone trust to-zone untrust policy default-permit match destination-address any
 set security policies from-zone trust to-zone untrust policy default-permit match application any
 set security policies from-zone trust to-zone untrust policy default-permit then permit
+set security zones security-zone trust tcp-rst
 set security zones security-zone trust host-inbound-traffic system-services all
 set security zones security-zone trust host-inbound-traffic protocols all
 set security zones security-zone trust interfaces ge-0/0/1.0
 set security zones security-zone trust interfaces lo0.0
+set security zones security-zone untrust screen untrust-screen
 set security zones security-zone untrust host-inbound-traffic system-services all
 set security zones security-zone untrust host-inbound-traffic protocols all
 set security zones security-zone untrust interfaces ge-0/0/0.0
 set interfaces ge-0/0/0 unit 0 family inet address 11.11.11.2/30
 set interfaces ge-0/0/1 unit 0 family inet address 14.14.14.2/30
-set interfaces fxp0 unit 0 family inet dhcp
+set interfaces fxp0 unit 0 family inet address 100.123.12.1/16
 set interfaces lo0 unit 0 family inet address 100.0.0.1/32
 set policy-options policy-statement trust-policy term 1 from protocol bgp
 set policy-options policy-statement trust-policy term 1 from route-filter 0.0.0.0/0 exact
+set policy-options policy-statement trust-policy term 1 from route-filter 80.0.0.0/24 exact
+set policy-options policy-statement trust-policy term 1 from route-filter 85.0.0.10/32 exact
+set policy-options policy-statement trust-policy term 1 from route-filter 0.0.0.0/0 orlonger
 set policy-options policy-statement trust-policy term 1 then next-hop self
 set policy-options policy-statement trust-policy term 1 then accept
 set policy-options policy-statement trust-policy term 2 from protocol direct
@@ -207,6 +233,7 @@ set protocols bgp group MX-INET export untrust-policy
 set protocols bgp group MX-INET local-as 500
 set protocols bgp group MX-INET neighbor 11.11.11.1 peer-as 2000
 set routing-options autonomous-system 500
+set routing-options static route 0.0.0.0/0 next-hop 100.123.0.1
 set routing-options static route 40.0.0.0/30 discard
 ```
 
@@ -230,6 +257,7 @@ set security policies from-zone trust to-zone untrust policy default-permit matc
 set security policies from-zone trust to-zone untrust policy default-permit match destination-address any
 set security policies from-zone trust to-zone untrust policy default-permit match application any
 set security policies from-zone trust to-zone untrust policy default-permit then permit
+set security zones security-zone trust tcp-rst
 set security zones security-zone trust host-inbound-traffic system-services all
 set security zones security-zone trust host-inbound-traffic protocols all
 set security zones security-zone trust interfaces ge-0/0/1.0
@@ -240,10 +268,13 @@ set security zones security-zone untrust host-inbound-traffic protocols all
 set security zones security-zone untrust interfaces ge-0/0/0.0
 set interfaces ge-0/0/0 unit 0 family inet address 12.12.12.2/30
 set interfaces ge-0/0/1 unit 0 family inet address 15.15.15.2/30
-set interfaces fxp0 unit 0 family inet dhcp
+set interfaces fxp0 unit 0 family inet address 100.123.12.2/16
 set interfaces lo0 unit 0 family inet address 100.0.0.1/32
 set policy-options policy-statement trust-policy term 1 from protocol bgp
 set policy-options policy-statement trust-policy term 1 from route-filter 0.0.0.0/0 exact
+set policy-options policy-statement trust-policy term 1 from route-filter 80.0.0.0/24 exact
+set policy-options policy-statement trust-policy term 1 from route-filter 85.0.0.10/32 exact
+set policy-options policy-statement trust-policy term 1 from route-filter 0.0.0.0/0 orlonger
 set policy-options policy-statement trust-policy term 1 then next-hop self
 set policy-options policy-statement trust-policy term 1 then accept
 set policy-options policy-statement trust-policy term 2 from protocol direct
@@ -265,6 +296,7 @@ set protocols bgp group MX-INET export untrust-policy
 set protocols bgp group MX-INET local-as 500
 set protocols bgp group MX-INET neighbor 12.12.12.1 peer-as 2000
 set routing-options autonomous-system 500
+set routing-options static route 0.0.0.0/0 next-hop 100.123.0.1
 set routing-options static route 50.0.0.0/30 discard
 ```
 
