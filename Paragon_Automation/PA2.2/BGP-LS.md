@@ -158,12 +158,12 @@ protocols {
 set groups p2p-protocols protocols isis interface <*> point-to-point
 set groups p2p-protocols protocols ospf area 0.0.0.0 interface <*> interface-type p2p
 ```
-## Paragon Workers
+## Paragon Controller
 
 ```
 How do we know the Paragon Automation IP for BGP-LS connection is 100.123.42.2 ?
 
-First we login into one of PA workers node and search a pod contains "bmp"
+First we login into one of PA controllers node and search a pod contains "bmp"
 
 @controller-1:~# kubectl get pods -A | grep bmp
 pf-74b36a89-070d-4e34-b55b-bc180df84bd1   bmp-5f589697b4-xdhrw                                          3/3     Running     0              19d
@@ -219,7 +219,7 @@ Insert PE5 BGP-LS peer IP address and the AS number and restart the browser.
 
 ## Optional
 ```
-If your PA2.2.0 does not grab the topology correctly or take longer time, you can try to restart the toposerver pods from the workers
+If your PA2.2.0 does not grab the topology correctly or take longer time, you can try to restart the toposerver pods from the controller
 
 @controller-1:~# kubectl get pods -A | grep topo
 pf-74b36a89-070d-4e34-b55b-bc180df84bd1   toposerver-597849bb6d-xp4c2                                   2/2     Running     0              5d17h
