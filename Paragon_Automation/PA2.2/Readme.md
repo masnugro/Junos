@@ -18,7 +18,7 @@ Thank you to Henry Cheung and Darshan Sreenivas for all the discussions and trou
 Prerequisite: You already have PA2.2.0 installed in your environment
 
 Use Case:
-Service Orchestration
+Service Provisioning
 1. L3VPN
 2. L2VPN (EVPN)
     a. EVPN Single-homed
