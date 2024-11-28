@@ -14,8 +14,8 @@ This is for Juniper PA2.2.0 environment
 ```
 Prerequisite: You already have PA2.2.0 installed in your environment
 
-Verification Tested:
-Service Orchestration:
+Use Case:
+Service Orchestration
 1. L3VPN
 2. L2VPN (EVPN)
     a. EVPN Single-homed
@@ -24,5 +24,4 @@ Service Orchestration:
 
 BGP-LS
 PCEP
-
 ```
