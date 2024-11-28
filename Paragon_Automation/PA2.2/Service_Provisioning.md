@@ -191,7 +191,7 @@ Peer                     AS      InPkt     OutPkt    OutQ   Flaps Last Up/Dwn St
   bgp.evpn.0: 0/0/0/0
   __default_evpn__.evpn.0: 0/0/0/0
   4218852c-9dd0-11ef-b5c3-deba06bc9197.inet.0: 1/1/1/0
-  _3e8931aa-a00e-11ef-b5c3-deba06bc9197.evpn.0: 0/0/0/0_
+  **3e8931aa**-a00e-11ef-b5c3-deba06bc9197.evpn.0: 0/0/0/0
   0cf5ee9d-acc8-11ef-b5e5-5a21a950e2af.inet.0: 1/1/1/0
   14ec68b6-accb-11ef-b5e5-5a21a950e2af.evpn.0: 0/0/0/0
 
