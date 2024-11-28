@@ -191,7 +191,7 @@ Peer                     AS      InPkt     OutPkt    OutQ   Flaps Last Up/Dwn St
   bgp.evpn.0: 0/0/0/0
   __default_evpn__.evpn.0: 0/0/0/0
   4218852c-9dd0-11ef-b5c3-deba06bc9197.inet.0: 1/1/1/0
-  **3e8931aa**-a00e-11ef-b5c3-deba06bc9197.evpn.0: 0/0/0/0
+  3e8931aa-a00e-11ef-b5c3-deba06bc9197.evpn.0: 0/0/0/0
   0cf5ee9d-acc8-11ef-b5e5-5a21a950e2af.inet.0: 1/1/1/0
   14ec68b6-accb-11ef-b5e5-5a21a950e2af.evpn.0: 0/0/0/0
 
@@ -210,15 +210,15 @@ Peer                     AS      InPkt     OutPkt    OutQ   Flaps Last Up/Dwn St
                       AS path: I, validation-state: unverified
                     >  to 25.25.25.1 via ge-0/0/0.0, label-switched-path MPLS-MESH-from-vMX-PE5-to-vMX-PE6
                        to 23.23.23.2 via ge-0/0/2.0, label-switched-path Bypass->25.25.25.1
-
-
-
 ```
 
+## Paragon GUI Verification for EVPN Single-homed
 
+<img width="612" alt="image" src="https://github.com/user-attachments/assets/62986282-1c65-4db4-a5c1-d1c02776e62a">
 
+<img width="358" alt="image" src="https://github.com/user-attachments/assets/e39d9f25-09c7-452a-acbc-fd5f125d7c98">
 
-
+<img width="841" alt="image" src="https://github.com/user-attachments/assets/814da0dc-f2b2-4658-ba03-63e63c49a4e7">
 
 
 
