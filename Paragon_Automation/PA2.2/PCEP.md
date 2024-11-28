@@ -86,8 +86,6 @@ and we get the exact same result from the node
 <img width="612" alt="image" src="https://github.com/user-attachments/assets/d6bc3c5a-a13a-433b-a46b-70a5d002be8f">
 
 
-```
-
 
 
 
