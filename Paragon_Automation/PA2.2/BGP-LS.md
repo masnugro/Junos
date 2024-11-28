@@ -13,6 +13,12 @@ d. (Optional): In a rarely case, you need to restart the toposerver pods from PA
 ## PE5 Configuration and Verification
 
 ```
+I am using JunOS 23.4R1.9 for all the nodes
+@vMX-PE5> show version          
+Hostname: vMX-PE5
+Model: vmx
+Junos: 23.4R1.9
+
 @vMX-PE5> show configuration protocols bgp
 group BGP-LS {
     type internal;
@@ -25,7 +31,7 @@ group BGP-LS {
 }
 
 set protocols bgp group northstar type internal
-set protocols bgp group northstar local-address 100.123.1.8
+set protocols bgp group northstar local-address 100.123.1.8 --> this is management IP address for PE5
 set protocols bgp group northstar family traffic-engineering unicast
 set protocols bgp group northstar export TE
 set protocols bgp group northstar allow 0.0.0.0/0
@@ -88,7 +94,8 @@ Peer                     AS      InPkt     OutPkt    OutQ   Flaps Last Up/Dwn St
   3e8931aa-a00e-11ef-b5c3-deba06bc9197.evpn.0: 0/0/0/0
   0cf5ee9d-acc8-11ef-b5e5-5a21a950e2af.inet.0: 1/1/1/0
   14ec68b6-accb-11ef-b5e5-5a21a950e2af.evpn.0: 0/0/0/0
-**100.123.42.2**          64220      16344      16416       0       0  5d 2:31:11 **Establ** --> Let's focus on peer 100.123.42.2, since this is the PA peer for BGP-LS
+100.123.42.2          64220      16344      16416       0       0  5d 2:31:11 Establ
+--> Let's focus on peer 100.123.42.2, since this is the PA peer for BGP-LS
   lsdist.0: 0/0/0/0
 192.168.3.1             113          0          0       0       0    14:41:11 Active
 192.168.3.1             113          0          0       0       0 2w5d 15:50:41 Connect
@@ -131,8 +138,110 @@ lsdist.0: 96 destinations, 96 routes (96 active, 0 holddown, 0 hidden)
 
 We can see that the topology information has been advertised by PE5 to PA
 
+Do not forget to configure point-to-point protocols in every nodes in the network managed by PA
+@vMX-PE5> show configuration groups p2p-protocols 
+protocols {
+    isis {
+        interface <*> {
+            point-to-point;
+        }
+    }
+    ospf {
+        area 0.0.0.0 {
+            interface <*> {
+                interface-type p2p;
+            }
+        }
+    }
+}
+
+set groups p2p-protocols protocols isis interface <*> point-to-point
+set groups p2p-protocols protocols ospf area 0.0.0.0 interface <*> interface-type p2p
+```
+## Paragon Workers
 
 ```
+How do we know the Paragon Automation IP for BGP-LS connection is 100.123.42.2 ?
+
+First we login into one of PA workers node and search a pod contains "bmp"
+
+@controller-1:~# kubectl get pods -A | grep bmp
+pf-74b36a89-070d-4e34-b55b-bc180df84bd1   bmp-5f589697b4-xdhrw                                          3/3     Running     0              19d
+bmp is Juniper cRPD which has the BGP-LS peer to the network
+
+Then we can do describe pod to know the IP which we need to peer from the network
+@controller-1:~# kubectl describe pod -n pf-74b36a89-070d-4e34-b55b-bc180df84bd1 bmp-5f589697b4-xdhrw
+Name:             bmp-5f589697b4-xdhrw
+Namespace:        pf-74b36a89-070d-4e34-b55b-bc180df84bd1
+Priority:         0
+Service Account:  default
+Node:             controller-2/100.123.42.2 --> we can see the 100.123.42.2 IP address
+... Truncated ...
+
+You can also login to cRPD if you wish to do so.
+
+@controller-1:~# kubectl -n pf-74b36a89-070d-4e34-b55b-bc180df84bd1 exec -it bmp-5f589697b4-xdhrw -c crpd -- cli
+root@bmp-5f589697b4-xdhrw> show configuration 
+## Last commit: 2024-11-08 08:57:33 UTC by root
+version 20231214.153508_builder.r1390688;
+groups {
+    extra {
+        protocols {
+            bgp {
+                group BGP-LS {
+                    neighbor 100.123.1.8;
+                }
+            }
+        }
+    }
+}
+protocols {
+    bgp {
+        group BGP-LS {
+            type internal;
+            family traffic-engineering {
+                unicast;
+            }
+            allow 0.0.0.0/0;
+        }
+    }
+}
+
+```
+
+## Paragon GUI
+```
+Insert PE5 BGP-LS peer IP address and the AS number and restart the browser.
+```
+
+<img width="612" alt="image" src="https://github.com/user-attachments/assets/b8c99ec0-2bda-4b49-adc1-8a807fa0ae72">
+
+
+## Optional
+```
+If your PA2.2.0 does not grab the topology correctly or take longer time, you can try to restart the toposerver pods from the workers
+
+@controller-1:~# kubectl get pods -A | grep topo
+pf-74b36a89-070d-4e34-b55b-bc180df84bd1   toposerver-597849bb6d-xp4c2                                   2/2     Running     0              5d17h
+
+@controller-1:~# kubectl delete pod -n pf-74b36a89-070d-4e34-b55b-bc180df84bd1 toposerver-597849bb6d-xp4c2
+
+Wait for ~ 30 seconds to ensure both of the containers are up and running and then restart your PA GUI
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
