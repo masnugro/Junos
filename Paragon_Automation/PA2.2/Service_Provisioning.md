@@ -19,7 +19,7 @@ To make service provisioning workflows runs smoothly, there are some prerequisit
 4. L2-address resource: This is for "ESI address", "Admin key" and "System-id" resource
 5. Routing resource: This is for AS number resource
 
-I will upload the JSON file for L3VPN, L2VPN (EVPN) and L2Circuit in separate files
+I will upload the sample JSON file for L3VPN, L2VPN (EVPN) and L2Circuit in separate files
 
 ```
 ## L3VPN
