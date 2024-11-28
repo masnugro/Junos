@@ -1,0 +1,614 @@
+{
+    "operation": "create",
+    "fh_config": {
+      "type": "service_order"
+    },
+    "customer_id": "a4f1c980-06b1-11ef-af49-c6656c4b6af6",
+    "design_id": "l3vpn",
+    "instance_id": "L3vpn-Agung",
+    "l3vpn_svc": {
+      "sites": {
+        "site": [
+          {
+            "site_id": "SaltLake1",
+            "site_network_accesses": {
+              "site_network_access": [
+                {
+                  "site_network_access_id": "SaltLakeLink1",
+                  "bearer": {
+                    "requested_type": {
+                      "requested_type": "ethernet",
+                      "strict": true
+                    }
+                  },
+                  "ip_connection": {
+                    "ipv4": {
+                      "address_allocation_type": "static-address",
+                      "addresses": {
+                        "customer_address": "192.168.2.1",
+                        "provider_address": "192.168.2.2",
+                        "prefix_length": 24
+                      }
+                    },
+                    "oam": {
+                      "bfd": {
+                        "enabled": false
+                      }
+                    }
+                  },
+                  "placement_interface": {
+                    "ce": "ce2",
+                    "ifSpeed": "1000",
+                    "interface": "ge-0/0/5.201",
+                    "pe": "00000000-0000-0000-1000-2c6bf519f700",
+                    "pop": "5499e87d-b46a-4dd5-92e9-fa0db470fad9"
+                  },
+                  "placement_options": [
+                    {
+                      "ce": "ce222",
+                      "ifSpeed": "1000",
+                      "pe": "00000000-0000-0000-1000-2c6bf519f700",
+                      "pop": "5499e87d-b46a-4dd5-92e9-fa0db470fad9",
+                      "ports": [
+                        "ge-0/0/7"
+                      ],
+                      "vlan": "0"
+                    },
+                    {
+                      "ce": "ce2",
+                      "ifSpeed": "1000",
+                      "pe": "00000000-0000-0000-1000-2c6bf519f700",
+                      "pop": "5499e87d-b46a-4dd5-92e9-fa0db470fad9",
+                      "ports": [
+                        "ge-0/0/5"
+                      ],
+                      "vlan": "200"
+                    },
+                    {
+                      "ce": "ce2",
+                      "ifSpeed": "1000",
+                      "pe": "00000000-0000-0000-1000-2c6bf519f700",
+                      "pop": "5499e87d-b46a-4dd5-92e9-fa0db470fad9",
+                      "ports": [
+                        "ge-0/0/5"
+                      ],
+                      "vlan": "201"
+                    },
+                    {
+                      "ce": "ce2",
+                      "ifSpeed": "1000",
+                      "pe": "00000000-0000-0000-1000-2c6bf519f700",
+                      "pop": "5499e87d-b46a-4dd5-92e9-fa0db470fad9",
+                      "ports": [
+                        "ge-0/0/5"
+                      ],
+                      "vlan": "202"
+                    },
+                    {
+                      "ce": "ce2",
+                      "ifSpeed": "1000",
+                      "pe": "00000000-0000-0000-1000-2c6bf519f700",
+                      "pop": "5499e87d-b46a-4dd5-92e9-fa0db470fad9",
+                      "ports": [
+                        "ge-0/0/5"
+                      ],
+                      "vlan": "203"
+                    },
+                    {
+                      "ce": "ce2",
+                      "ifSpeed": "1000",
+                      "pe": "00000000-0000-0000-1000-2c6bf519f700",
+                      "pop": "5499e87d-b46a-4dd5-92e9-fa0db470fad9",
+                      "ports": [
+                        "ge-0/0/5"
+                      ],
+                      "vlan": "204"
+                    },
+                    {
+                      "ce": "ce2",
+                      "ifSpeed": "1000",
+                      "pe": "00000000-0000-0000-1000-2c6bf519f700",
+                      "pop": "5499e87d-b46a-4dd5-92e9-fa0db470fad9",
+                      "ports": [
+                        "ge-0/0/5"
+                      ],
+                      "vlan": "205"
+                    },
+                    {
+                      "ce": "ce2",
+                      "ifSpeed": "1000",
+                      "pe": "00000000-0000-0000-1000-2c6bf519f700",
+                      "pop": "5499e87d-b46a-4dd5-92e9-fa0db470fad9",
+                      "ports": [
+                        "ge-0/0/5"
+                      ],
+                      "vlan": "206"
+                    },
+                    {
+                      "ce": "ce2",
+                      "ifSpeed": "1000",
+                      "pe": "00000000-0000-0000-1000-2c6bf519f700",
+                      "pop": "5499e87d-b46a-4dd5-92e9-fa0db470fad9",
+                      "ports": [
+                        "ge-0/0/5"
+                      ],
+                      "vlan": "207"
+                    },
+                    {
+                      "ce": "ce2",
+                      "ifSpeed": "1000",
+                      "pe": "00000000-0000-0000-1000-2c6bf519f700",
+                      "pop": "5499e87d-b46a-4dd5-92e9-fa0db470fad9",
+                      "ports": [
+                        "ge-0/0/5"
+                      ],
+                      "vlan": "208"
+                    },
+                    {
+                      "ce": "ce2",
+                      "ifSpeed": "1000",
+                      "pe": "00000000-0000-0000-1000-2c6bf519f700",
+                      "pop": "5499e87d-b46a-4dd5-92e9-fa0db470fad9",
+                      "ports": [
+                        "ge-0/0/5"
+                      ],
+                      "vlan": "209"
+                    }
+                  ],
+                  "service": {
+                    "svc_input_bandwidth": 1000000,
+                    "svc_output_bandwidth": 1000000,
+                    "svc_mtu": 1500
+                  },
+                  "vpn_attachment": {
+                    "site_role": "any-to-any-role",
+                    "vpn_id": "111"
+                  },
+                  "access_diversity": {
+                    "groups": {
+                      "group": []
+                    },
+                    "constraints": {
+                      "constraint": []
+                    }
+                  },
+                  "routing_protocols": {
+                    "routing_protocol": [
+                      {
+                        "type": "bgp",
+                        "bgp": {
+                          "autonomous_system": 112
+                        }
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            "devices": {
+              "device": []
+            },
+            "locations": {
+              "location": [
+                {
+                  "location_id": "US",
+                  "postal_code": "84106"
+                }
+              ]
+            },
+            "maximum_routes": {
+              "address_family": [
+                {
+                  "af": "ipv4",
+                  "maximum_routes": 1000
+                }
+              ]
+            }
+          },
+          {
+            "site_id": "Durham1",
+            "site_network_accesses": {
+              "site_network_access": [
+                {
+                  "site_network_access_id": "DurhamLink1",
+                  "bearer": {
+                    "requested_type": {
+                      "requested_type": "ethernet",
+                      "strict": true
+                    }
+                  },
+                  "ip_connection": {
+                    "ipv4": {
+                      "address_allocation_type": "static-address",
+                      "addresses": {
+                        "customer_address": "192.168.3.1",
+                        "provider_address": "192.168.3.2",
+                        "prefix_length": 24
+                      }
+                    },
+                    "oam": {
+                      "bfd": {
+                        "enabled": false
+                      }
+                    }
+                  },
+                  "placement_interface": {
+                    "ce": "ce3",
+                    "ifSpeed": "1000",
+                    "interface": "ge-0/0/5.201",
+                    "pe": "00000000-0000-0000-1000-2c6bf592e300",
+                    "pop": "6121a88c-3a12-4e95-ad2c-a393b8b51978"
+                  },
+                  "placement_options": [
+                    {
+                      "ce": "ce3",
+                      "ifSpeed": "1000",
+                      "pe": "00000000-0000-0000-1000-2c6bf592e300",
+                      "pop": "6121a88c-3a12-4e95-ad2c-a393b8b51978",
+                      "ports": [
+                        "ge-0/0/5"
+                      ],
+                      "vlan": "200"
+                    },
+                    {
+                      "ce": "ce3",
+                      "ifSpeed": "1000",
+                      "pe": "00000000-0000-0000-1000-2c6bf592e300",
+                      "pop": "6121a88c-3a12-4e95-ad2c-a393b8b51978",
+                      "ports": [
+                        "ge-0/0/5"
+                      ],
+                      "vlan": "201"
+                    },
+                    {
+                      "ce": "ce3",
+                      "ifSpeed": "1000",
+                      "pe": "00000000-0000-0000-1000-2c6bf592e300",
+                      "pop": "6121a88c-3a12-4e95-ad2c-a393b8b51978",
+                      "ports": [
+                        "ge-0/0/5"
+                      ],
+                      "vlan": "202"
+                    },
+                    {
+                      "ce": "ce3",
+                      "ifSpeed": "1000",
+                      "pe": "00000000-0000-0000-1000-2c6bf592e300",
+                      "pop": "6121a88c-3a12-4e95-ad2c-a393b8b51978",
+                      "ports": [
+                        "ge-0/0/5"
+                      ],
+                      "vlan": "203"
+                    },
+                    {
+                      "ce": "ce333",
+                      "ifSpeed": "1000",
+                      "pe": "00000000-0000-0000-1000-2c6bf592e300",
+                      "pop": "6121a88c-3a12-4e95-ad2c-a393b8b51978",
+                      "ports": [
+                        "ge-0/0/7"
+                      ],
+                      "vlan": "0"
+                    },
+                    {
+                      "ce": "ce3",
+                      "ifSpeed": "1000",
+                      "pe": "00000000-0000-0000-1000-2c6bf592e300",
+                      "pop": "6121a88c-3a12-4e95-ad2c-a393b8b51978",
+                      "ports": [
+                        "ge-0/0/5"
+                      ],
+                      "vlan": "204"
+                    },
+                    {
+                      "ce": "ce3",
+                      "ifSpeed": "1000",
+                      "pe": "00000000-0000-0000-1000-2c6bf592e300",
+                      "pop": "6121a88c-3a12-4e95-ad2c-a393b8b51978",
+                      "ports": [
+                        "ge-0/0/5"
+                      ],
+                      "vlan": "205"
+                    },
+                    {
+                      "ce": "ce3",
+                      "ifSpeed": "1000",
+                      "pe": "00000000-0000-0000-1000-2c6bf592e300",
+                      "pop": "6121a88c-3a12-4e95-ad2c-a393b8b51978",
+                      "ports": [
+                        "ge-0/0/5"
+                      ],
+                      "vlan": "206"
+                    },
+                    {
+                      "ce": "ce3",
+                      "ifSpeed": "1000",
+                      "pe": "00000000-0000-0000-1000-2c6bf592e300",
+                      "pop": "6121a88c-3a12-4e95-ad2c-a393b8b51978",
+                      "ports": [
+                        "ge-0/0/5"
+                      ],
+                      "vlan": "207"
+                    },
+                    {
+                      "ce": "ce3",
+                      "ifSpeed": "1000",
+                      "pe": "00000000-0000-0000-1000-2c6bf592e300",
+                      "pop": "6121a88c-3a12-4e95-ad2c-a393b8b51978",
+                      "ports": [
+                        "ge-0/0/5"
+                      ],
+                      "vlan": "208"
+                    },
+                    {
+                      "ce": "ce3",
+                      "ifSpeed": "1000",
+                      "pe": "00000000-0000-0000-1000-2c6bf592e300",
+                      "pop": "6121a88c-3a12-4e95-ad2c-a393b8b51978",
+                      "ports": [
+                        "ge-0/0/5"
+                      ],
+                      "vlan": "209"
+                    }
+                  ],
+                  "service": {
+                    "svc_input_bandwidth": 1000000,
+                    "svc_input_bandwidth": 1000000,
+                    "svc_output_bandwidth": 1000000,
+                    "svc_mtu": 1500
+                  },
+                  "vpn_attachment": {
+                    "site_role": "any-to-any-role",
+                    "vpn_id": "111"
+                  },
+                  "access_diversity": {
+                    "groups": {
+                      "group": []
+                    },
+                    "constraints": {
+                      "constraint": []
+                    }
+                  },
+                  "routing_protocols": {
+                    "routing_protocol": [
+                      {
+                        "type": "bgp",
+                        "bgp": {
+                          "autonomous_system": 113
+                        }
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            "devices": {
+              "device": []
+            },
+            "locations": {
+              "location": [
+                {
+                  "location_id": "US",
+                  "postal_code": "27705"
+                }
+              ]
+            },
+            "maximum_routes": {
+              "address_family": [
+                {
+                  "af": "ipv4",
+                  "maximum_routes": 1000
+                }
+              ]
+            }
+          },
+          {
+            "site_id": "Herdon1",
+            "site_network_accesses": {
+              "site_network_access": [
+                {
+                  "site_network_access_id": "HerdonLink1",
+                  "bearer": {
+                    "requested_type": {
+                      "requested_type": "ethernet",
+                      "strict": true
+                    }
+                  },
+                  "ip_connection": {
+                    "ipv4": {
+                      "address_allocation_type": "static-address",
+                      "addresses": {
+                        "customer_address": "192.168.4.1",
+                        "provider_address": "192.168.4.2",
+                        "prefix_length": 24
+                      }
+                    },
+                    "oam": {
+                      "bfd": {
+                        "enabled": false
+                      }
+                    }
+                  },
+                  "placement_interface": {
+                    "ce": "ce4",
+                    "ifSpeed": "1000",
+                    "interface": "ge-0/0/5.201",
+                    "pe": "00000000-0000-0000-1000-2c6bf507ed00",
+                    "pop": "b3b9b531-fe04-4f06-a8c4-71d4fd474454"
+                  },
+                  "placement_options": [
+                    {
+                      "ce": "ce4",
+                      "ifSpeed": "1000",
+                      "pe": "00000000-0000-0000-1000-2c6bf507ed00",
+                      "pop": "b3b9b531-fe04-4f06-a8c4-71d4fd474454",
+                      "ports": [
+                        "ge-0/0/5"
+                      ],
+                      "vlan": "200"
+                    },
+                    {
+                      "ce": "ce4",
+                      "ifSpeed": "1000",
+                      "pe": "00000000-0000-0000-1000-2c6bf507ed00",
+                      "pop": "b3b9b531-fe04-4f06-a8c4-71d4fd474454",
+                      "ports": [
+                        "ge-0/0/5"
+                      ],
+                      "vlan": "201"
+                    },
+                    {
+                      "ce": "ce4",
+                      "ifSpeed": "1000",
+                      "pe": "00000000-0000-0000-1000-2c6bf507ed00",
+                      "pop": "b3b9b531-fe04-4f06-a8c4-71d4fd474454",
+                      "ports": [
+                        "ge-0/0/5"
+                      ],
+                      "vlan": "202"
+                    },
+                    {
+                      "ce": "ce4",
+                      "ifSpeed": "1000",
+                      "pe": "00000000-0000-0000-1000-2c6bf507ed00",
+                      "pop": "b3b9b531-fe04-4f06-a8c4-71d4fd474454",
+                      "ports": [
+                        "ge-0/0/5"
+                      ],
+                      "vlan": "203"
+                    },
+                    {
+                      "ce": "ce4",
+                      "ifSpeed": "1000",
+                      "pe": "00000000-0000-0000-1000-2c6bf507ed00",
+                      "pop": "b3b9b531-fe04-4f06-a8c4-71d4fd474454",
+                      "ports": [
+                        "ge-0/0/5"
+                      ],
+                      "vlan": "204"
+                    },
+                    {
+                      "ce": "ce4",
+                      "ifSpeed": "1000",
+                      "pe": "00000000-0000-0000-1000-2c6bf507ed00",
+                      "pop": "b3b9b531-fe04-4f06-a8c4-71d4fd474454",
+                      "ports": [
+                        "ge-0/0/5"
+                      ],
+                      "vlan": "205"
+                    },
+                    {
+                      "ce": "ce4",
+                      "ifSpeed": "1000",
+                      "pe": "00000000-0000-0000-1000-2c6bf507ed00",
+                      "pop": "b3b9b531-fe04-4f06-a8c4-71d4fd474454",
+                      "ports": [
+                        "ge-0/0/5"
+                      ],
+                      "vlan": "206"
+                    },
+                    {
+                      "ce": "ce4",
+                      "ifSpeed": "1000",
+                      "pe": "00000000-0000-0000-1000-2c6bf507ed00",
+                      "pop": "b3b9b531-fe04-4f06-a8c4-71d4fd474454",
+                      "ports": [
+                        "ge-0/0/5"
+                      ],
+                      "vlan": "207"
+                    },
+                    {
+                      "ce": "ce444",
+                      "ifSpeed": "1000",
+                      "pe": "00000000-0000-0000-1000-2c6bf507ed00",
+                      "pop": "b3b9b531-fe04-4f06-a8c4-71d4fd474454",
+                      "ports": [
+                        "ge-0/0/7"
+                      ],
+                      "vlan": "0"
+                    },
+                    {
+                      "ce": "ce4",
+                      "ifSpeed": "1000",
+                      "pe": "00000000-0000-0000-1000-2c6bf507ed00",
+                      "pop": "b3b9b531-fe04-4f06-a8c4-71d4fd474454",
+                      "ports": [
+                        "ge-0/0/5"
+                      ],
+                      "vlan": "208"
+                    },
+                    {
+                      "ce": "ce4",
+                      "ifSpeed": "1000",
+                      "pe": "00000000-0000-0000-1000-2c6bf507ed00",
+                      "pop": "b3b9b531-fe04-4f06-a8c4-71d4fd474454",
+                      "ports": [
+                        "ge-0/0/5"
+                      ],
+                      "vlan": "209"
+                    }
+                  ],
+                  "service": {
+                    "svc_input_bandwidth": 1000000,
+                    "svc_input_bandwidth": 1000000,
+                    "svc_output_bandwidth": 1000000,
+                    "svc_mtu": 1500
+                  },
+                  "vpn_attachment": {
+                    "site_role": "any-to-any-role",
+                    "vpn_id": "111"
+                  },
+                  "access_diversity": {
+                    "groups": {
+                      "group": []
+                    },
+                    "constraints": {
+                      "constraint": []
+                    }
+                  },
+                  "routing_protocols": {
+                    "routing_protocol": [
+                      {
+                        "type": "bgp",
+                        "bgp": {
+                          "autonomous_system": 114
+                        }
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            "devices": {
+              "device": []
+            },
+            "locations": {
+              "location": [
+                {
+                  "location_id": "US",
+                  "postal_code": "20171"
+                }
+              ]
+            },
+            "maximum_routes": {
+              "address_family": [
+                {
+                  "af": "ipv4",
+                  "maximum_routes": 1000
+                }
+              ]
+            }
+          }
+        ]
+      },
+      "vpn_services": {
+        "vpn_service": [
+          {
+            "vpn_service_topology": "any-to-any",
+            "vpn_id": "111",
+            "customer_name": "L3VPN-Cust"
+          }
+        ]
+      }
+    }
+  }
