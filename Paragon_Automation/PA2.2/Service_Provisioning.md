@@ -214,11 +214,16 @@ Peer                     AS      InPkt     OutPkt    OutQ   Flaps Last Up/Dwn St
 
 ## Paragon GUI Verification for EVPN Single-homed
 
-<img width="612" alt="image" src="https://github.com/user-attachments/assets/62986282-1c65-4db4-a5c1-d1c02776e62a">
+<img width="612" alt="image" src="https://github.com/user-attachments/assets/6f7bcff7-f1fa-4171-b8e4-653497c4eeb0">
 
-<img width="358" alt="image" src="https://github.com/user-attachments/assets/e39d9f25-09c7-452a-acbc-fd5f125d7c98">
+<img width="395" alt="image" src="https://github.com/user-attachments/assets/5a6823b2-bff8-4199-929b-465360084794">
 
-<img width="841" alt="image" src="https://github.com/user-attachments/assets/814da0dc-f2b2-4658-ba03-63e63c49a4e7">
+<img width="840" alt="image" src="https://github.com/user-attachments/assets/1e3a4c85-c5eb-49ef-ae0e-fb146e58f702">
+
+
+
+
+
 
 
 
