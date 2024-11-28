@@ -11,6 +11,7 @@ This is for Juniper PA2.2.0 environment
 <img width="888" alt="image" src="https://github.com/user-attachments/assets/0b96d141-59dd-404d-b10b-837742a39979">
 
 
+
 ```
 Prerequisite: You already have PA2.2.0 installed in your environment
 
