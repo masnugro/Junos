@@ -1,0 +1,138 @@
+## Test and verify BGP-LS is working in PA2.2.0
+
+
+```
+There are some prerequisites to make BGP-LS works as follow:
+
+a. Configure one of the PEs to peer BGP-LS with PA2.2.0 (in my case I will use PE5)
+b. Configure "Dynamic Topology" from PA GUI and put the BGP-LS peer address and AS number then hit the "Save" button
+c. Ensure you configure point-to-point interface in your IGP routing protocols (ISIS/OSPF) To get the optimal topology picture
+d. (Optional): In a rarely case, you need to restart the toposerver pods from PA Kubernetes clusters
+```
+
+## PE5 Configuration and Verification
+
+```
+@vMX-PE5> show configuration protocols bgp
+group BGP-LS {
+    type internal;
+    local-address 100.123.1.8;
+    family traffic-engineering {
+        unicast;
+    }
+    export TE;
+    allow 0.0.0.0/0;
+}
+
+set protocols bgp group northstar type internal
+set protocols bgp group northstar local-address 100.123.1.8
+set protocols bgp group northstar family traffic-engineering unicast
+set protocols bgp group northstar export TE
+set protocols bgp group northstar allow 0.0.0.0/0
+
+
+@vMX-PE5> show configuration policy-options policy-statement TE 
+term 1 {
+    from family traffic-engineering;
+    then accept;
+}
+
+set policy-options policy-statement TE term 1 from family traffic-engineering
+set policy-options policy-statement TE term 1 then accept
+
+@vMX-PE5> show bgp summary      
+Threading mode: BGP I/O
+Default eBGP mode: advertise - accept, receive - accept
+Groups: 4 Peers: 8 Down peers: 2
+Unconfigured peers: 1
+Table          Tot Paths  Act Paths Suppressed    History Damp State    Pending
+bgp.l3vpn.0          
+                       5          5          0          0          0          0
+lsdist.0             
+                       0          0          0          0          0          0
+bgp.evpn.0           
+                       1          1          0          0          0          0
+Peer                     AS      InPkt     OutPkt    OutQ   Flaps Last Up/Dwn State|#Active/Received/Accepted/Damped...
+1.1.192.0             64220      16164      16130       0       2  5d 2:35:47 Establ
+  bgp.l3vpn.0: 2/2/2/0
+  bgp.evpn.0: 0/0/0/0
+  __default_evpn__.evpn.0: 0/0/0/0
+  4218852c-9dd0-11ef-b5c3-deba06bc9197.inet.0: 1/1/1/0
+  3e8931aa-a00e-11ef-b5c3-deba06bc9197.evpn.0: 0/0/0/0
+  0cf5ee9d-acc8-11ef-b5e5-5a21a950e2af.inet.0: 1/1/1/0
+  14ec68b6-accb-11ef-b5e5-5a21a950e2af.evpn.0: 0/0/0/0
+1.1.192.1             64220      13401      13385       0       2  4d 5:44:11 Establ
+  bgp.l3vpn.0: 0/0/0/0
+  bgp.evpn.0: 0/0/0/0
+  __default_evpn__.evpn.0: 0/0/0/0
+  3e8931aa-a00e-11ef-b5c3-deba06bc9197.evpn.0: 0/0/0/0
+  14ec68b6-accb-11ef-b5e5-5a21a950e2af.evpn.0: 0/0/0/0
+1.1.192.2             64220      21773      21720       0       2 6d 20:54:36 Establ
+  bgp.l3vpn.0: 2/2/2/0
+  bgp.evpn.0: 1/1/1/0
+  __default_evpn__.evpn.0: 0/0/0/0
+  4218852c-9dd0-11ef-b5c3-deba06bc9197.inet.0: 1/1/1/0
+  3e8931aa-a00e-11ef-b5c3-deba06bc9197.evpn.0: 1/1/1/0
+  0cf5ee9d-acc8-11ef-b5e5-5a21a950e2af.inet.0: 1/1/1/0
+  14ec68b6-accb-11ef-b5e5-5a21a950e2af.evpn.0: 0/0/0/0
+3.3.3.0               64220       3599       3604       0       4  1d 3:19:10 Establ
+  bgp.l3vpn.0: 0/0/0/0
+  bgp.evpn.0: 0/0/0/0
+  __default_evpn__.evpn.0: 0/0/0/0
+  3e8931aa-a00e-11ef-b5c3-deba06bc9197.evpn.0: 0/0/0/0
+  14ec68b6-accb-11ef-b5e5-5a21a950e2af.evpn.0: 0/0/0/0
+3.3.3.1               64220       9708       9695       0       3  3d 1:39:55 Establ
+  bgp.l3vpn.0: 1/1/1/0
+  bgp.evpn.0: 0/0/0/0
+  __default_evpn__.evpn.0: 0/0/0/0
+  3e8931aa-a00e-11ef-b5c3-deba06bc9197.evpn.0: 0/0/0/0
+  0cf5ee9d-acc8-11ef-b5e5-5a21a950e2af.inet.0: 1/1/1/0
+  14ec68b6-accb-11ef-b5e5-5a21a950e2af.evpn.0: 0/0/0/0
+**100.123.42.2**          64220      16344      16416       0       0  5d 2:31:11 **Establ** --> Let's focus on peer 100.123.42.2, since this is the PA peer for BGP-LS
+  lsdist.0: 0/0/0/0
+192.168.3.1             113          0          0       0       0    14:41:11 Active
+192.168.3.1             113          0          0       0       0 2w5d 15:50:41 Connect
+
+@vMX-PE5> show route advertising-protocol bgp 100.123.42.2 
+
+lsdist.0: 96 destinations, 96 routes (96 active, 0 holddown, 0 hidden)
+  Prefix                  Nexthop              MED     Lclpref    AS path
+  NODE { AS:64220 ISO:0010.0119.2000.00 ISIS-L1:0 }/1216                  
+*                         Self                         100        I
+                IPv4 Router-ids:
+                  1.1.192.0
+                Area border router: No
+                External router: No
+                Attached: No
+                Overload: No
+                Hostname: vMX-PE2
+                Area membership:
+                  49 00 03 
+                Node MSD:
+                 - Type: 1, Value: 3
+                 - Type: 2, Value: 16
+  Prefix                  Nexthop              MED     Lclpref    AS path
+  NODE { AS:64220 ISO:0010.0119.2001.00 ISIS-L1:0 }/1216                  
+*                         Self                         100        I
+                IPv4 Router-ids:
+                  1.1.192.1
+                Area border router: No
+                External router: No
+                Attached: No
+                Overload: No
+                Hostname: vMX-PE3
+                Area membership:
+                  49 00 03 
+                Node MSD:
+                 - Type: 1, Value: 3
+                 - Type: 2, Value: 16
+
+... Truncated ...
+
+We can see that the topology information has been advertised by PE5 to PA
+
+
+```
+
+
+
