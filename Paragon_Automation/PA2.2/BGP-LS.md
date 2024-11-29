@@ -161,51 +161,32 @@ set groups p2p-protocols protocols ospf area 0.0.0.0 interface <*> interface-typ
 ## Paragon Controller
 
 ```
-How do we know the Paragon Automation IP for BGP-LS connection is 100.123.42.2 ?
+who has IP address 100.123.42.2 ?
 
-First we login into one of PA controllers node and search a pod contains "bmp"
+You can just login into one of Paragon controller cluster:
 
-@controller-1:~# kubectl get pods -A | grep bmp
-pf-74b36a89-070d-4e34-b55b-bc180df84bd1   bmp-5f589697b4-xdhrw                                          3/3     Running     0              19d
-bmp is Juniper cRPD which has the BGP-LS peer to the network
+Welcome to Juniper Paragon Automation OVA
 
-Then we can do describe pod to know the IP which we need to peer from the network
-@controller-1:~# kubectl describe pod -n pf-74b36a89-070d-4e34-b55b-bc180df84bd1 bmp-5f589697b4-xdhrw
-Name:             bmp-5f589697b4-xdhrw
-Namespace:        pf-74b36a89-070d-4e34-b55b-bc180df84bd1
-Priority:         0
-Service Account:  default
-Node:             controller-2/100.123.42.2 --> we can see the 100.123.42.2 IP address
-... Truncated ...
 
-You can also login to cRPD if you wish to do so.
+This Controller IP: 100.123.42.1
 
-@controller-1:~# kubectl -n pf-74b36a89-070d-4e34-b55b-bc180df84bd1 exec -it bmp-5f589697b4-xdhrw -c crpd -- cli
-root@bmp-5f589697b4-xdhrw> show configuration 
-## Last commit: 2024-11-08 08:57:33 UTC by root
-version 20231214.153508_builder.r1390688;
-groups {
-    extra {
-        protocols {
-            bgp {
-                group BGP-LS {
-                    neighbor 100.123.1.8;
-                }
-            }
-        }
-    }
-}
-protocols {
-    bgp {
-        group BGP-LS {
-            type internal;
-            family traffic-engineering {
-                unicast;
-            }
-            allow 0.0.0.0/0;
-        }
-    }
-}
+This VM 100.123.42.1 is part of an EPIC on-prem system.
+===============================================================================
+Controller IP    :  100.123.42.1, 100.123.42.2, 100.123.42.3, 100.123.42.4
+PAA Virtual IP   :  100.123.42.101
+UI               :  https://100.123.42.100
+Web Admin User   :  jcluser@juniper.net
+===============================================================================
+ova: 20241017_1231 
+build: eop-release-2.2.0.8298.g4407b53b58
+
+***************************************************************
+                WELCOME TO PARAGON SHELL!
+     You will now be able to execute Paragon CLI commands!
+***************************************************************
+root@controller-1>
+
+From above Paragon CLI you can see that the owner of IP address 100.123.42.2 is Controller-2
 
 ```
 
