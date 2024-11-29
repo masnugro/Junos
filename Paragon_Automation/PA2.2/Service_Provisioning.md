@@ -422,7 +422,7 @@ Dn -- down
 Neighbor: 2.2.2.1 
     Interface                 Type  St     Time last up          # Up trans
     ge-0/0/6.1001(vc 100)     rmt   Up
-
+```
 
 ## Paragon Automation GUI Verification for L2Circuit
 
