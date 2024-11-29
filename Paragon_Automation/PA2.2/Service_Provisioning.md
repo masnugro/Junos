@@ -80,7 +80,7 @@ unit 202 {
     vrf-table-label;
 }
 ```
-## Paragon GUI Verification for L3VPN Service Provisioning
+## Paragon Automation GUI Verification for L3VPN Service Provisioning
 
 <img width="645" alt="image" src="https://github.com/user-attachments/assets/1724e586-7f09-45bc-a0fb-7959d16e68ef">
 
@@ -191,7 +191,7 @@ Peer                     AS      InPkt     OutPkt    OutQ   Flaps Last Up/Dwn St
   bgp.evpn.0: 0/0/0/0
   __default_evpn__.evpn.0: 0/0/0/0
   4218852c-9dd0-11ef-b5c3-deba06bc9197.inet.0: 1/1/1/0
-  3e8931aa-a00e-11ef-b5c3-deba06bc9197.evpn.0: 0/0/0/0
+  3e8931aa-a00e-11ef-b5c3-deba06bc9197.evpn.0: 0/0/0/0 --> This is the EVPN single-homed instance
   0cf5ee9d-acc8-11ef-b5e5-5a21a950e2af.inet.0: 1/1/1/0
   14ec68b6-accb-11ef-b5e5-5a21a950e2af.evpn.0: 0/0/0/0
 
@@ -212,13 +212,165 @@ Peer                     AS      InPkt     OutPkt    OutQ   Flaps Last Up/Dwn St
                        to 23.23.23.2 via ge-0/0/2.0, label-switched-path Bypass->25.25.25.1
 ```
 
-## Paragon GUI Verification for EVPN Single-homed
+## Paragon Automation GUI Verification for EVPN Single-homed
 
 <img width="645" alt="image" src="https://github.com/user-attachments/assets/6f7bcff7-f1fa-4171-b8e4-653497c4eeb0">
 
 <img width="415" alt="image" src="https://github.com/user-attachments/assets/5a6823b2-bff8-4199-929b-465360084794">
 
 <img width="840" alt="image" src="https://github.com/user-attachments/assets/1e3a4c85-c5eb-49ef-ae0e-fb146e58f702">
+
+## EVPN Multi-homed
+
+```
+Let's continue to the EVPN multi-homed, shall we?
+
+I will still use the same Herndon - Durham sites for EVPN Multi-homed service provisioning with following detail:
+1. We need ESI-LAG for EVPN multi-homed, hence AE (Aggregated Interface) interface is mandatory
+2. I will use ge-0/0/7 as CE-facing interface (we need separate physical interface connection to bound with AE)
+3. C-VLAN: 303
+4. Additional configuration needed in EVPN multi-homed: create access diversity, define the LAG interface and availability redundancy mode: all-active.
+
+Service Provisioning step-by-step from PA2.2.0 GUI:
+1. Hover to the left pane and choose Orchestration -> Instance -> Add -> L2VPN
+2. Upload JSON file for the intended service provisioning
+3. Ensure all parameters uploaded correctly
+4. Last step is to click "Save & Provision"
+5. Wait until the order state becomes "Success"
+
+This time I will use sample configuration from PE6 to look at what are all the important configuration pushed by PA2.2.0
+
+@vMX-PE6> show configuration groups paragon-service-orchestration interfaces ge-0/0/7  
+gigether-options {
+    802.3ad ae2;
+}
+
+@vMX-PE6> show configuration groups paragon-service-orchestration interfaces ae2         
+flexible-vlan-tagging;
+encapsulation flexible-ethernet-services;
+esi {
+    00:23:45:67:89:ab:00:00:00:01;
+    all-active;
+    df-election-type {
+        preference {
+            value 100;
+        }
+    }
+}
+aggregated-ether-options {
+    minimum-links 1;
+    lacp {
+        system-id 00:00:11:11:22:01;
+        admin-key 100;
+    }
+}
+unit 303 {
+    encapsulation vlan-bridge;
+    vlan-id 303;
+    output-vlan-map swap;
+}
+
+@vMX-PE6> show configuration groups paragon-service-orchestration routing-instances 14ec68b6-accb-11ef-b5e5-5a21a950e2af 
+instance-type evpn;
+protocols {
+    evpn {
+        interface ae2.303 {
+            interface-mac-limit {
+                100;
+                packet-action drop;
+            }
+        }
+        duplicate-mac-detection {
+            detection-threshold 5;
+            auto-recovery-time 2;
+        }
+    }
+}
+description "routing instance for customer EVPN-Customer and instance evpn303";
+vlan-id none;
+no-normalization;
+interface ae2.303;
+route-distinguisher 1235:7;
+vrf-target target:1235:1;
+
+EVPN multi-homed instance:
+
+@vMX-PE6> show evpn instance 14ec68b6-accb-11ef-b5e5-5a21a950e2af extensive 
+Instance: 14ec68b6-accb-11ef-b5e5-5a21a950e2af
+  Route Distinguisher: 1235:7
+  VLAN ID: None
+  Per-instance MAC route label: 301408
+  Duplicate MAC detection threshold: 5
+  Duplicate MAC detection window: 180
+  Duplicate MAC auto-recovery time: 2
+  MAC database status                     Local  Remote
+    MAC advertisements:                       0       0
+    MAC+IP advertisements:                    0       0
+    Default gateway MAC advertisements:       0       0
+  Number of local interfaces: 2 (1 up)
+    Interface name  ESI                            Mode             Status     AC-Role
+    .local..13      00:00:00:00:00:00:00:00:00:00  single-homed     Up         Root 
+    ae2.303         00:23:45:67:89:ab:00:00:00:01  all-active       Down       Root --> we can see all-active redundancy mode and active ESI
+  Number of IRB interfaces: 0 (0 up)
+  Number of protect interfaces: 0
+  Number of bridge domains: 1
+    VLAN  Domain-ID Intfs/up   IRB-intf  Mode            MAC-sync v4-SG-sync v6-SG-sync
+    None               1  0              Extended        Enabled  Disabled   Disabled  
+  Number of neighbors: 0
+  Number of ethernet segments: 1
+    ESI: 00:23:45:67:89:ab:00:00:00:01
+      Status: Unresolved
+      Local interface: ae2.303, Status: Down
+      DF Election Algorithm: MOD based
+      Designated forwarder: DF not elected yet
+      Last designated forwarder update: Nov 27 14:23:42
+      Advertised MAC label: 301440
+      Advertised aliasing label: 301440
+      Advertised split horizon label: 301456
+  SMET Forwarding: Disabled
+
+@vMX-PE6> show bgp summary 
+Threading mode: BGP I/O
+Default eBGP mode: advertise - accept, receive - accept
+Groups: 4 Peers: 8 Down peers: 3
+Table          Tot Paths  Act Paths Suppressed    History Damp State    Pending
+bgp.l3vpn.0          
+                       7          7          0          0          0          0
+bgp.evpn.0           
+                       1          1          0          0          0          0
+Peer                     AS      InPkt     OutPkt    OutQ   Flaps Last Up/Dwn State|#Active/Received/Accepted/Damped...
+1.1.192.0             64220      38062      38087       0       1 1w5d 0:45:52 Establ
+  bgp.l3vpn.0: 3/3/3/0
+  bgp.evpn.0: 0/0/0/0
+  __default_evpn__.evpn.0: 0/0/0/0
+  4218852c-9dd0-11ef-b5c3-deba06bc9197.inet.0: 1/1/1/0
+  3e8931aa-a00e-11ef-b5c3-deba06bc9197.evpn.0: 0/0/0/0
+  0cf5ee9d-acc8-11ef-b5e5-5a21a950e2af.inet.0: 1/1/1/0
+  14ec68b6-accb-11ef-b5e5-5a21a950e2af.evpn.0: 0/0/0/0 --> This is the EVPN multi-homed instance
+  85814818-ad63-11ef-b5e5-5a21a950e2af.inet.0: 1/1/1/0
+... Truncated ...
+```
+
+## Paragon Automation GUI Verification for EVPN Single-homed
+
+<img width="645" alt="image" src="https://github.com/user-attachments/assets/662287d2-91f2-4420-b326-730e7cd04d3c">
+
+<img width="415" alt="image" src="https://github.com/user-attachments/assets/2451f52b-5d8d-4a46-b1ec-606d10d30bfa">
+
+<img width="380" alt="image" src="https://github.com/user-attachments/assets/70be57bf-23b7-42f9-a396-66b84309d912">
+
+<img width="323" alt="image" src="https://github.com/user-attachments/assets/e92332a4-8ec9-41e0-bdb2-2109e5bde93c">
+
+<img width="612" alt="image" src="https://github.com/user-attachments/assets/8490d7a5-d0da-4cdf-bf3c-e7a42135ecd6">
+
+
+
+
+
+
+
+
+
 
 
 
