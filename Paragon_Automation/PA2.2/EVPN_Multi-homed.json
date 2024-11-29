@@ -1,0 +1,349 @@
+{
+  "customer_id": "a4f1c980-06b1-11ef-af49-c6656c4b6af6",
+  "design_id": "elan-evpn-csm",
+  "instance_id": "evpn303",
+  "l2vpn_svc": {
+    "sites": {
+      "site": [
+        {
+          "devices": {
+            "device": [
+              {
+                "device_id": "ce333",
+                "location": "US"
+              }
+            ]
+          },
+          "locations": {
+            "location": [
+              {
+                "location_id": "US",
+                "postal_code": "27705"
+              }
+            ]
+          },
+          "mac_loop_prevention": {
+            "frequency": 5,
+            "retry_timer": 120
+          },
+          "site_id": "Durham1",
+          "site_network_accesses": {
+            "site_network_access": [
+              {
+                "access_diversity": {
+                  "constraints": {
+                    "constraint": []
+                  },
+                  "groups": {
+                    "group": []
+                  }
+                },
+                "availability": {
+                  "access_priority": 100
+                },
+                "bearer": {
+                  "requested_type": {
+                    "strict": false,
+                    "type": "ethernet"
+                  }
+                },
+                "connection": {
+                  "eth_inf_type": "tagged",
+                  "tagged_interface": {
+                    "dot1q_vlan_tagged": {
+                      "cvlan_id": 303,
+                      "tg_type": "c-vlan"
+                    },
+                    "type": "dot1q"
+                  },
+                  "untagged_interface": {
+                    "lldp": false,
+                    "oam_802.3ah_link": {
+                      "enabled": false
+                    },
+                    "speed": 1000
+                  }
+                },
+                "device_reference": "ce333",
+                "mac_addr_limit": {
+                  "action": "drop",
+                  "limit_number": 100
+                },
+                "network_access_id": "sna3",
+                "placement_interface": {
+                  "interface": "ge-0/0/7.303",
+                  "options": [
+                    {
+                      "pe": "00000000-0000-0000-1000-2c6bf592e300",
+                      "pop": "6121a88c-3a12-4e95-ad2c-a393b8b51978",
+                      "ports": [
+                        "ge-0/0/7"
+                      ],
+                      "vlan": "300"
+                    },
+                    {
+                      "pe": "00000000-0000-0000-1000-2c6bf592e300",
+                      "pop": "6121a88c-3a12-4e95-ad2c-a393b8b51978",
+                      "ports": [
+                        "ge-0/0/7"
+                      ],
+                      "vlan": "303"
+                    },
+                    {
+                      "pe": "00000000-0000-0000-1000-2c6bf592e300",
+                      "pop": "6121a88c-3a12-4e95-ad2c-a393b8b51978",
+                      "ports": [
+                        "ge-0/0/7"
+                      ],
+                      "vlan": "302"
+                    },
+                    {
+                      "pe": "00000000-0000-0000-1000-2c6bf592e300",
+                      "pop": "6121a88c-3a12-4e95-ad2c-a393b8b51978",
+                      "ports": [
+                        "ge-0/0/7"
+                      ],
+                      "vlan": "303"
+                    },
+                    {
+                      "pe": "00000000-0000-0000-1000-2c6bf592e300",
+                      "pop": "6121a88c-3a12-4e95-ad2c-a393b8b51978",
+                      "ports": [
+                        "ge-0/0/7"
+                      ],
+                      "vlan": "304"
+                    },
+                    {
+                      "pe": "00000000-0000-0000-1000-2c6bf592e300",
+                      "pop": "6121a88c-3a12-4e95-ad2c-a393b8b51978",
+                      "ports": [
+                        "ge-0/0/7"
+                      ],
+                      "vlan": "305"
+                    },
+                    {
+                      "pe": "00000000-0000-0000-1000-2c6bf592e300",
+                      "pop": "6121a88c-3a12-4e95-ad2c-a393b8b51978",
+                      "ports": [
+                        "ge-0/0/7"
+                      ],
+                      "vlan": "306"
+                    },
+                    {
+                      "pe": "00000000-0000-0000-1000-2c6bf592e300",
+                      "pop": "6121a88c-3a12-4e95-ad2c-a393b8b51978",
+                      "ports": [
+                        "ge-0/0/7"
+                      ],
+                      "vlan": "307"
+                    },
+                    {
+                      "pe": "00000000-0000-0000-1000-2c6bf592e300",
+                      "pop": "6121a88c-3a12-4e95-ad2c-a393b8b51978",
+                      "ports": [
+                        "ge-0/0/7"
+                      ],
+                      "vlan": "308"
+                    },
+                    {
+                      "pe": "00000000-0000-0000-1000-2c6bf592e300",
+                      "pop": "6121a88c-3a12-4e95-ad2c-a393b8b51978",
+                      "ports": [
+                        "ge-0/0/7"
+                      ],
+                      "vlan": "309"
+                    }
+                  ],
+                  "pe": "00000000-0000-0000-1000-2c6bf592e300",
+                  "pop": "6121a88c-3a12-4e95-ad2c-a393b8b51978"
+                },
+                "service": {
+                  "svc_bandwidth": {
+                    "bandwidth": []
+                  }
+                },
+                "vpn_attachment": {
+                  "vpn_id": "303"
+                }
+              }
+            ]
+          },
+          "site_vpn_flavor": "site-vpn-flavor-single"
+        },
+        {
+          "devices": {
+            "device": [
+              {
+                "device_id": "ce444",
+                "location": "US"
+              }
+            ]
+          },
+          "locations": {
+            "location": [
+              {
+                "location_id": "US",
+                "postal_code": "20171"
+              }
+            ]
+          },
+          "mac_loop_prevention": {
+            "frequency": 5,
+            "retry_timer": 120
+          },
+          "site_id": "Herdon1",
+          "site_network_accesses": {
+            "site_network_access": [
+              {
+                "access_diversity": {
+                  "constraints": {
+                    "constraint": []
+                  },
+                  "groups": {
+                    "group": []
+                  }
+                },
+                "availability": {
+                  "access_priority": 100
+                },
+                "bearer": {
+                  "requested_type": {
+                    "strict": false,
+                    "type": "ethernet"
+                  }
+                },
+                "connection": {
+                  "eth_inf_type": "tagged",
+                  "tagged_interface": {
+                    "dot1q_vlan_tagged": {
+                      "cvlan_id": 303,
+                      "tg_type": "c-vlan"
+                    },
+                    "type": "dot1q"
+                  },
+                  "untagged_interface": {
+                    "lldp": false,
+                    "oam_802.3ah_link": {
+                      "enabled": false
+                    },
+                    "speed": 1000
+                  }
+                },
+                "device_reference": "ce444",
+                "mac_addr_limit": {
+                  "action": "drop",
+                  "limit_number": 100
+                },
+                "network_access_id": "sna4",
+                "placement_interface": {
+                  "interface": "ge-0/0/7.303",
+                  "options": [
+                    {
+                      "pe": "00000000-0000-0000-1000-2c6bf507ed00",
+                      "pop": "b3b9b531-fe04-4f06-a8c4-71d4fd474454",
+                      "ports": [
+                        "ge-0/0/7"
+                      ],
+                      "vlan": "300"
+                    },
+                    {
+                      "pe": "00000000-0000-0000-1000-2c6bf507ed00",
+                      "pop": "b3b9b531-fe04-4f06-a8c4-71d4fd474454",
+                      "ports": [
+                        "ge-0/0/7"
+                      ],
+                      "vlan": "303"
+                    },
+                    {
+                      "pe": "00000000-0000-0000-1000-2c6bf507ed00",
+                      "pop": "b3b9b531-fe04-4f06-a8c4-71d4fd474454",
+                      "ports": [
+                        "ge-0/0/7"
+                      ],
+                      "vlan": "302"
+                    },
+                    {
+                      "pe": "00000000-0000-0000-1000-2c6bf507ed00",
+                      "pop": "b3b9b531-fe04-4f06-a8c4-71d4fd474454",
+                      "ports": [
+                        "ge-0/0/7"
+                      ],
+                      "vlan": "303"
+                    },
+                    {
+                      "pe": "00000000-0000-0000-1000-2c6bf507ed00",
+                      "pop": "b3b9b531-fe04-4f06-a8c4-71d4fd474454",
+                      "ports": [
+                        "ge-0/0/7"
+                      ],
+                      "vlan": "304"
+                    },
+                    {
+                      "pe": "00000000-0000-0000-1000-2c6bf507ed00",
+                      "pop": "b3b9b531-fe04-4f06-a8c4-71d4fd474454",
+                      "ports": [
+                        "ge-0/0/7"
+                      ],
+                      "vlan": "305"
+                    },
+                    {
+                      "pe": "00000000-0000-0000-1000-2c6bf507ed00",
+                      "pop": "b3b9b531-fe04-4f06-a8c4-71d4fd474454",
+                      "ports": [
+                        "ge-0/0/7"
+                      ],
+                      "vlan": "306"
+                    },
+                    {
+                      "pe": "00000000-0000-0000-1000-2c6bf507ed00",
+                      "pop": "b3b9b531-fe04-4f06-a8c4-71d4fd474454",
+                      "ports": [
+                        "ge-0/0/7"
+                      ],
+                      "vlan": "307"
+                    },
+                    {
+                      "pe": "00000000-0000-0000-1000-2c6bf507ed00",
+                      "pop": "b3b9b531-fe04-4f06-a8c4-71d4fd474454",
+                      "ports": [
+                        "ge-0/0/7"
+                      ],
+                      "vlan": "308"
+                    },
+                    {
+                      "pe": "00000000-0000-0000-1000-2c6bf507ed00",
+                      "pop": "b3b9b531-fe04-4f06-a8c4-71d4fd474454",
+                      "ports": [
+                        "ge-0/0/7"
+                      ],
+                      "vlan": "309"
+                    }
+                  ],
+                  "pe": "00000000-0000-0000-1000-2c6bf507ed00",
+                  "pop": "b3b9b531-fe04-4f06-a8c4-71d4fd474454"
+                },
+                "service": {
+                  "svc_bandwidth": {
+                    "bandwidth": []
+                  }
+                },
+                "vpn_attachment": {
+                  "vpn_id": "303"
+                }
+              }
+            ]
+          },
+          "site_vpn_flavor": "site-vpn-flavor-single"
+        }
+      ]
+    },
+    "vpn_services": {
+      "vpn_service": [
+        {
+          "customer_name": "EVPN-Customer",
+          "vpn_id": "303"
+        }
+      ]
+    }
+  }
+}
