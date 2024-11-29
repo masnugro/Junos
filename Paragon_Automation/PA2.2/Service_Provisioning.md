@@ -365,7 +365,72 @@ Peer                     AS      InPkt     OutPkt    OutQ   Flaps Last Up/Dwn St
 
 
 
+## L2Circuit
 
+```
+Last but not least, let's go create the L2Circuit connection in our network.
+I will use Sunnyvale - Herndon sites this time with following detail:
+1. I will use ge-0/0/6 as CE-facing interface
+2. C-VLAN: 1001
+3. Customer name: L2ckt-Cust and Instance ID: l2ckt1
+
+Service Provisioning step-by-step from PA2.2.0 GUI:
+1. Hover to the left pane and choose Orchestration -> Instance -> Add -> L2Circuit
+2. Upload JSON file for the intended service provisioning
+3. Ensure all parameters uploaded correctly
+4. Last step is to click "Save & Provision"
+5. Wait until the order state becomes "Success"
+
+Here is the configuration from PA2.2.0 to the node (I am using Sunnyvale (PE1) as example)
+
+@vMX-PE1> show configuration groups paragon-service-orchestration interfaces ge-0/0/6    
+flexible-vlan-tagging;
+encapsulation flexible-ethernet-services;
+unit 1001 {
+    encapsulation vlan-ccc;
+    vlan-id 1001;
+    family ccc;
+}
+
+@vMX-PE1> show configuration groups paragon-service-orchestration protocols l2circuit    
+neighbor 2.2.2.1 {
+    interface ge-0/0/6.1001 {
+        virtual-circuit-id 100;
+        community 4b686155-9dd3-11ef-b5c3-deba06bc9197-l2ckt1;
+    }
+
+@vMX-PE1> show l2circuit connections    
+Layer-2 Circuit Connections:
+
+Legend for connection status (St)   
+EI -- encapsulation invalid      NP -- interface h/w not present   
+MM -- mtu mismatch               Dn -- down                       
+EM -- encapsulation mismatch     VC-Dn -- Virtual circuit Down    
+CM -- control-word mismatch      Up -- operational                
+VM -- vlan id mismatch           CF -- Call admission control failure
+OL -- no outgoing label          IB -- TDM incompatible bitrate 
+NC -- intf encaps not CCC/TCC    TM -- TDM misconfiguration 
+BK -- Backup Connection          ST -- Standby Connection
+CB -- rcvd cell-bundle size bad  SP -- Static Pseudowire
+LD -- local site signaled down   RS -- remote site standby
+RD -- remote site signaled down  HS -- Hot-standby Connection
+XX -- unknown
+
+Legend for interface status  
+Up -- operational            
+Dn -- down                   
+Neighbor: 2.2.2.1 
+    Interface                 Type  St     Time last up          # Up trans
+    ge-0/0/6.1001(vc 100)     rmt   Up
+
+
+## Paragon Automation GUI Verification for L2Circuit
+
+<img width="671" alt="image" src="https://github.com/user-attachments/assets/e812c53e-e7ef-4f8c-bd90-ad239fad2969">
+
+<img width="415" alt="image" src="https://github.com/user-attachments/assets/cfbba804-9758-48ad-8c34-e146fe65b6ec">
+
+<img width="612" alt="image" src="https://github.com/user-attachments/assets/5211ce20-cdf3-4664-b3f9-c3cd5e4c3c2d">
 
 
 
