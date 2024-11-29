@@ -1,1 +1,1 @@
-Lab for multiple WAN technology using Juniper router. 
+## Lab for multiple WAN technologies using Juniper router. 
