@@ -13,7 +13,10 @@
 
 
 ```
-Prerequisite: You already have PA2.2.0 installed in your environment
+Prerequisite:
+1. You already have PA2.2.0 installed in your environment
+2. Your routers has "In Service" operational state
+3. Please refer here for PA2.2.0 quick start guide: https://www.juniper.net/documentation/us/en/quick-start/software/juniper-paragon-automation2.2.0/pa-quick-start-guide/topics/topic-map/step-1-begin.html
 
 Use Case:
 Service Provisioning
