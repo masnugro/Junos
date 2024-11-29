@@ -1,4 +1,4 @@
-## Test and verify BGP-LS is working in PA2.2.0
+![image](https://github.com/user-attachments/assets/5babfb0b-5fee-4fb2-bbd5-37ce0d5e420d)## Test and verify BGP-LS is working in PA2.2.0
 
 
 ```
@@ -187,6 +187,57 @@ build: eop-release-2.2.0.8298.g4407b53b58
 root@controller-1>
 
 From above Paragon CLI you can see that the owner of IP address 100.123.42.2 is Controller-2
+
+You can also login to cRPD if you wish to do so.
+
+root@controller-2:~# kubectl get pods -A | grep bmp
+pf-74b36a89-070d-4e34-b55b-bc180df84bd1   bmp-5f589697b4-xdhrw     3/3     Running     0              20
+
+root@controller-2:~# kubectl -n pf-74b36a89-070d-4e34-b55b-bc180df84bd1 exec -it bmp-5f589697b4-xdhrw -c  crpd -- cli
+
+@bmp-5f589697b4-xdhrw> show configuration 
+## Last commit: 2024-11-08 08:57:33 UTC by root
+version 20231214.153508_builder.r1390688;
+groups {
+    extra {
+        protocols {
+            bgp {
+                group northstar {
+                    neighbor 100.123.1.8; --> PE5 management address
+                }
+            }
+        }
+    }
+}
+apply-groups extra;
+routing-options {
+    autonomous-system 64220;
+    bmp {
+        local-address 127.0.0.1;
+        local-port 10003;
+        connection-mode passive;
+        monitor enable;
+        station localhost {
+            station-address 127.0.0.1;
+        }
+    }
+    static {
+        route 0.0.0.0/0 next-hop 169.254.1.1;
+    }
+}
+protocols {
+    bgp {
+        group northstar {
+            type internal;
+            family traffic-engineering {
+                unicast;
+            }
+            allow 0.0.0.0/0;
+        }
+    }
+}
+
+From above configuration you can see that the BGP is peering with PE5 IP management address 
 
 ```
 
