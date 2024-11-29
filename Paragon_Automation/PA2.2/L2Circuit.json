@@ -1,0 +1,114 @@
+{
+  "customer_id": "a4f1c980-06b1-11ef-af49-c6656c4b6af6",
+  "design_id": "l2vpn-nsm",
+  "instance_id": "l2ckt1",
+  "l2vpn_ntw": {
+    "vpn_services": {
+      "vpn_service": [
+        {
+          "customer_name": "L2ckt-Cust",
+          "vpn_id": "l2circuit-Agung",
+          "vpn_name": "l2ckt1",
+          "vpn_nodes": {
+            "vpn_node": [
+              {
+                "description": "",
+                "ne_id": "00000000-0000-0000-1000-2c6bf589f800",
+                "signaling_options": [
+                  {
+                    "ac_pw_list": [
+                      {
+                        "peer_addr": "2.2.2.1",
+                        "vc_id": 0
+                      }
+                    ],
+                    "t_ldp_pwe_type": "vpws-type",
+                    "type": "ldp-signaling"
+                  }
+                ],
+                "underlay_transport": {
+                  "instance_type": "lsp",
+                  "transport_instance_id": "MPLS-MESH-from-vMX-PE1-to-vMX-PE6"
+                },
+                "vpn_network_accesses": {
+                  "vpn_network_access": [
+                    {
+                      "connection": {
+                        "encapsulation": {
+                          "dot1q": {
+                            "c_vlan_id": 1001
+                          },
+                          "l2_access_type": "dot1q"
+                        }
+                      },
+                      "description": "port1",
+                      "id": "111",
+                      "port_id": "ge-0/0/6",
+                      "service": {
+                        "svc_input_bandwidth": {
+                          "input_bandwidth": []
+                        },
+                        "svc_output_bandwidth": {
+                          "output_bandwidth": []
+                        }
+                      }
+                    }
+                  ]
+                },
+                "vpn_node_id": "vMX-PE1"
+              },
+              {
+                "description": "",
+                "ne_id": "00000000-0000-0000-1000-2c6bf507ed00",
+                "signaling_options": [
+                  {
+                    "ac_pw_list": [
+                      {
+                        "peer_addr": "2.2.2.0",
+                        "vc_id": 0
+                      }
+                    ],
+                    "t_ldp_pwe_type": "vpws-type",
+                    "type": "ldp-signaling"
+                  }
+                ],
+                "underlay_transport": {
+                  "instance_type": "lsp",
+                  "transport_instance_id": "MPLS-MESH-from-vMX-PE6-to-vMX-PE1"
+                },
+                "vpn_network_accesses": {
+                  "vpn_network_access": [
+                    {
+                      "connection": {
+                        "encapsulation": {
+                          "dot1q": {
+                            "c_vlan_id": 1001
+                          },
+                          "l2_access_type": "dot1q"
+                        }
+                      },
+                      "description": "Port2",
+                      "id": "111",
+                      "port_id": "ge-0/0/6",
+                      "service": {
+                        "svc_input_bandwidth": {
+                          "input_bandwidth": []
+                        },
+                        "svc_output_bandwidth": {
+                          "output_bandwidth": []
+                        }
+                      }
+                    }
+                  ]
+                },
+                "vpn_node_id": "vMX-PE6"
+              }
+            ]
+          },
+          "vpn_svc_type": "vpws"
+        }
+      ]
+    }
+  },
+  "org_id": "74b36a89-070d-4e34-b55b-bc180df84bd1"
+}
