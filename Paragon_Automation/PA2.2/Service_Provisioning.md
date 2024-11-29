@@ -1,7 +1,7 @@
 ## Test and verify all the Service Provisioning capabilities is working in PA2.2.0
 
 ```
-Service Orchestration
+Service Provisioning
 1. L3VPN
 2. L2VPN (EVPN)
     a. EVPN Single-homed
