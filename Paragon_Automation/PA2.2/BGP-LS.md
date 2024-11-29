@@ -1,4 +1,4 @@
-![image](https://github.com/user-attachments/assets/5babfb0b-5fee-4fb2-bbd5-37ce0d5e420d)## Test and verify BGP-LS is working in PA2.2.0
+## Test and verify BGP-LS is working in PA2.2.0
 
 
 ```
