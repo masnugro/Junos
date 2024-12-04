@@ -13,7 +13,7 @@ Service Provisioning
 ```
 To make service provisioning workflows runs smoothly, there are some prerequisites needs to be fulfilled in resource instance as follow:
 
-1. Topology resource: This is to let PA workflows aware on which CE-facing interfaces and VLANS for IFL service resource for service provisioning orhestration from every PEs
+1. Topology resource: This is to let PA workflows aware on which CE-facing interfaces and VLANS for IFL service resource for service provisioning orchestration from every PEs
 2. VPN resource: This is to let PA workflows aware on "Community", "Route Distinguisher", "Route Target" and "VC ID" (this is specifically for L2Circuit service) resource that can be used by PA
 3. L3-address resource: This is for IP P2P and IP loopback interface resource
 4. L2-address resource: This is for "ESI address", "Admin key" and "System-id" resource
