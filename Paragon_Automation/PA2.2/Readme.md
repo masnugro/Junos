@@ -1,7 +1,7 @@
 
 ## This is for Juniper PA2.2.0 environment
 
-Please refer here for TechPost article written by Henry Cheung and I
+Please refer to link below for Juniper TechPost article written by Henry Cheung and myself
 
 https://community.juniper.net/blogs/masagung-nugroho/2024/12/19/service-orchestration-with-paragon-automation
 
