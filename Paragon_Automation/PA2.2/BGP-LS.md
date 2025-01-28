@@ -30,11 +30,11 @@ group BGP-LS {
     allow 0.0.0.0/0;
 }
 
-set protocols bgp group northstar type internal
-set protocols bgp group northstar local-address 100.123.1.8 --> this is management IP address for PE5
-set protocols bgp group northstar family traffic-engineering unicast
-set protocols bgp group northstar export TE
-set protocols bgp group northstar allow 0.0.0.0/0
+set protocols bgp group BGP-LS type internal
+set protocols bgp group BGP-LS local-address 100.123.1.8 --> this is management IP address for PE5
+set protocols bgp group BGP-LS family traffic-engineering unicast
+set protocols bgp group BGP-LS export TE
+set protocols bgp group BGP-LS allow 0.0.0.0/0
 
 
 @vMX-PE5> show configuration policy-options policy-statement TE 
