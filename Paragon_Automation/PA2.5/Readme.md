@@ -32,5 +32,6 @@
 
 ```
 6. SNMP trap forwarding and network optimization settings are now configurable
-<img width="1043" height="629" alt="image" src="https://github.com/user-attachments/assets/87569b25-3b70-49df-9e60-70df0c6002d9" />
 ```
+<img width="1043" height="629" alt="image" src="https://github.com/user-attachments/assets/87569b25-3b70-49df-9e60-70df0c6002d9" />
+
