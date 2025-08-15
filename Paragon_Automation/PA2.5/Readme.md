@@ -29,6 +29,8 @@
 
 <img width="771" height="438" alt="image" src="https://github.com/user-attachments/assets/52411aec-0d11-4e5f-a07d-6f54e219899c" />
 
+<img width="1565" height="721" alt="image" src="https://github.com/user-attachments/assets/c9201a29-593a-4fbe-a92f-d804060c9abd" />
+
 
 
 ## 6. SNMP trap forwarding and network optimization settings are now configurable ##
