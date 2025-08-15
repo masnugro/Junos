@@ -1,5 +1,6 @@
 ## Additional capabilities in PA2.5 ##
 
+```
 1. Tunnel Diversity for both RSVP-TE and SR-TE
 <img width="1530" height="649" alt="Screenshot 2025-08-15 at 3 15 53 PM" src="https://github.com/user-attachments/assets/0ccf44da-7204-4871-b5af-109f6ae7757e" />
 
@@ -28,3 +29,4 @@
 6. SNMP trap forwarding and network optimization settings are now configurable
 <img width="1043" height="629" alt="image" src="https://github.com/user-attachments/assets/87569b25-3b70-49df-9e60-70df0c6002d9" />
 
+```
