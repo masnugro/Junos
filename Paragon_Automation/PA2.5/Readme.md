@@ -15,7 +15,8 @@
 
 ## 3. LSP events history ##
 
-<img width="1521" height="719" alt="image" src="https://github.com/user-attachments/assets/ff27678c-8b26-438c-9b0d-3f259add974e" />
+<img width="1534" height="758" alt="image" src="https://github.com/user-attachments/assets/4663c99b-98f0-4fb3-80fa-fcda50e3efd9" />
+
 
 
 
