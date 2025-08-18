@@ -1,0 +1,28 @@
+services:
+  ollama:
+    image: ollama/ollama
+    container_name: ollama
+    ports:
+      - "11434:11434"  # Expose Ollama API
+    volumes:
+      - ollama:/root/.ollama
+    restart: unless-stopped
+
+  webui:
+    image: ghcr.io/open-webui/open-webui:main
+    container_name: open-webui
+    ports:
+      - "8080:8080"  # Expose WebUI
+    environment:
+      - OLLAMA_BASE_URLS=http://host.docker.internal:11434  # Ensure this points to the Ollama service
+      - OLLAMA_API_BASE_URL=http://0.0.0.0:11434  # Ensure this points to the Ollama service
+    depends_on:
+      - ollama
+    restart: unless-stopped
+    extra_hosts:
+      - host.docker.internal:host-gateway  # Allows access to host services
+    volumes:
+     - ollamaUI:/app/backend/data
+volumes:
+  ollama:
+  ollamaUI:
