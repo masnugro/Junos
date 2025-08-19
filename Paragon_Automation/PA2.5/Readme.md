@@ -43,3 +43,13 @@ This functionality is to automatically create LSP (one-to-one, one-to-all or ful
 
 <img width="1043" height="629" alt="image" src="https://github.com/user-attachments/assets/87569b25-3b70-49df-9e60-70df0c6002d9" />
 
+
+## 7. SR-MPLS Flexible Algorithm (Flex-algo) view supports
+
+<img width="451" height="210" alt="image" src="https://github.com/user-attachments/assets/88174bb1-2bdc-4138-b4f3-6dcd9492e647" />
+
+<img width="451" height="208" alt="image" src="https://github.com/user-attachments/assets/ede1c75c-b669-4904-be2c-c4c9d25fd928" />
+
+
+
+
