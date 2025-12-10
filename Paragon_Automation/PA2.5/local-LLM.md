@@ -1,6 +1,6 @@
 ## Step-by-step creating Local LLM and connect it to Routing Director LLM connector
 
-1. You can use Ubuntu 22.04 VM to host the LLM connector (this VM must reachable from Routing Director cluster)
+1. You can use Ubuntu 22.04 VM to host the LLM connector (this VM must be reachable from Routing Director cluster)
 2. Create 2 new folders (ollama and ollamaUI)
 3. Copy docker-compose.yml file to Ubuntu machine
 4. Install Docker containers: docker compose up -d
